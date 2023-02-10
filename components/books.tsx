@@ -144,7 +144,7 @@ export default function Books() {
       {renderBookCards()}
       <Grid xs={12} justify="center">
         { isNextBookLoading && <Loading /> }
-        <Spacer x={2} />
+        { isNextBookLoading && <Spacer x={2} /> }
         <Button disabled={!isThereMoreBooks()} onClick={loadNext}>Load more</Button>
       </Grid>
     </Grid.Container>
