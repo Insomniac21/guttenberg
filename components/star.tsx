@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import PropTypes, { InferProps } from 'prop-types';
 import { AiFillStar } from 'react-icons/ai';
 import { AiOutlineStar } from 'react-icons/ai';
 import { Button } from '@nextui-org/react';
 
 
-export default function Star({ isSelected, onClick }){
+type Props = {
+    isSelected: boolean;
+    onClick: () => void;
+}
+
+export default function Star({ isSelected, onClick } : Props){
     const [ isFilled, setIsFilled ] = useState(isSelected);
 
     const handleStarClick = () => {

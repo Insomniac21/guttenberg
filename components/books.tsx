@@ -10,13 +10,13 @@ import { Book } from '../models/book';
 
 export default function Books() {
   const [user, loading] = useAuthState(auth);
-  const [ books , setBooks ] = useState([]);
+  const [ books, setBooks ] = useState<Book[]>([]);
   const [ isBookLoading, setIsBookLoading ] = useState(false);
   const [ isNextBookLoading, setIsNextBookLoading ] = useState(false);
   const [ showFavoriteBooksOnly, setShowFavoriteBooksOnly ] = useState(false);
-  const [ myFavoriteBooks, setMyFavoriteBooks ] = useState([]);
+  const [ myFavoriteBooks, setMyFavoriteBooks ] = useState<Book[]>([]);
   const [ searchText, setSearchText ] = useState('');
-  const [ next, setNext ] = useState(null);
+  const [ next, setNext ] = useState<string>('');
 
   const handleSearchInputKeyPress = (e: React.KeyboardEvent<any>) => {
     if (e.key !== 'Enter' || showFavoriteBooksOnly) return;
@@ -30,11 +30,11 @@ export default function Books() {
   const handleAddButtonClick = (book : Book) => {
     if (isBookInFavorite(book)) {
       removeFromFavorite(book);
-      setMyFavoriteBooks((prevState) => prevState.filter((favoriteBook) => favoriteBook.id !== book.id));
-      setBooks((prevState) => prevState.filter((favoriteBook) => favoriteBook.id !== book.id));
+      setMyFavoriteBooks((prevState) => prevState.filter((favoriteBook: Book) => favoriteBook.id !== book.id));
+      setBooks((prevState) => prevState.filter((favoriteBook: Book) => favoriteBook.id !== book.id));
     } else {
       addToFavorite(book);
-      setMyFavoriteBooks((prevState) => [ ...prevState, book ]);
+      setMyFavoriteBooks((prevState: Book[]) => [ ...prevState, book ]);
     } 
   };
 
@@ -68,7 +68,7 @@ export default function Books() {
     const res = await fetch(next);
     const data = await res.json();
     setNext(data.next);
-    setBooks((prevState) => [ ...prevState, ...data.results ]);
+    setBooks((prevState: Book[]) => [ ...prevState, ...data.results ]);
     setIsNextBookLoading(false);
   }
 
@@ -121,7 +121,7 @@ export default function Books() {
 
   const isBookInFavorite = (book: Book) => {
     if (!myFavoriteBooks) return false;
-    return myFavoriteBooks.some((favoriteBook) => favoriteBook.id === book.id);
+    return myFavoriteBooks.some((favoriteBook: Book) => favoriteBook.id === book.id);
   };
 
   const isThereMoreBooks = () => {

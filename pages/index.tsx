@@ -25,7 +25,7 @@ export default function Home() {
         <Grid.Container justify="flex-end">
           <Grid xs={5} sm={5} md={5} lg={2}>
             <User
-              src={user?.photoURL}
+              src={user?.photoURL!}
               name={user?.displayName}
             />
           </Grid>
