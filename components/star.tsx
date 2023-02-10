@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { AiOutlineStar } from 'react-icons/ai';
+import { Button } from '@nextui-org/react';
 
 
 export default function Star({ isSelected, onClick }){
@@ -13,9 +14,9 @@ export default function Star({ isSelected, onClick }){
 
     const renderStar = () => {
         if (isFilled) {
-            return <AiFillStar size={50} onClick={handleStarClick} />;
+            return <Button light><AiFillStar size={50} onClick={handleStarClick} /></Button>;
         } else {
-            return <AiOutlineStar size={50} onClick={handleStarClick} />;
+            return <Button light><AiOutlineStar size={50} onClick={handleStarClick} /></Button>;
         }
     };
 
