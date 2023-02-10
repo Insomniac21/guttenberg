@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Card, Grid, Text, Input, Button, useCollator, Checkbox, Loading, Spacer } from '@nextui-org/react';
+import { Card, Grid, Text, Input, Button, Checkbox, Loading, Spacer } from '@nextui-org/react';
 import Star from './star';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase.config';
@@ -16,7 +16,6 @@ export default function Books() {
   const [ myFavoriteBooks, setMyFavoriteBooks ] = useState([]);
   const [ searchText, setSearchText ] = useState('');
   const [ next, setNext ] = useState(null);
-  const collator = useCollator({ numeric: true });
 
   const handleSearchInputKeyPress = (e) => {
     if (e.key !== 'Enter' || showFavoriteBooksOnly) return;
