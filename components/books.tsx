@@ -30,6 +30,7 @@ export default function Books() {
     if (isBookInFavorite(book)) {
       removeFromFavorite(book);
       setMyFavoriteBooks((prevState) => prevState.filter((favoriteBook) => favoriteBook.id !== book.id));
+      setBooks((prevState) => prevState.filter((favoriteBook) => favoriteBook.id !== book.id));
     } else {
       addToFavorite(book);
       setMyFavoriteBooks((prevState) => [ ...prevState, book ]);
@@ -90,14 +91,16 @@ export default function Books() {
     if (books.length === 0 && showFavoriteBooksOnly) return <h3>No favorite books found</h3>;
 
     return books.map((book) => {  
-      return (<Grid key={book.id} xs={4}>{renderBookCard(book)}</Grid>);
+      return (<Grid key={book.id} xs={2}>{renderBookCard(book)}</Grid>);
     });
   };
 
   const renderBookCard = (book) => {
     return (<Card css={{ p: "$6", mh: "55vh", mw: "40vw" }}>
               <Card.Header>
-                {renderStar(book)}
+                <Grid xs={12}>
+                  {renderStar(book)}
+                </Grid>
               </Card.Header>
               <Card.Image src={book.formats['image/jpeg']} />
               <Card.Body>

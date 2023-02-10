@@ -8,7 +8,7 @@ export default function MustSigninPopOver(){
             <Grid>
                 <Popover>
                     <Popover.Trigger>
-                        <Button light><AiOutlineStar size={50}/></Button>
+                        <button style={{ background: "None", border: "None" }}><AiOutlineStar size={50}/></button>
                     </Popover.Trigger>
                     <Popover.Content>
                         <Grid.Container css={{ borderRadius: "14px", padding: "0.75rem", maxWidth: "330px" }}>

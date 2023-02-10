@@ -22,15 +22,18 @@ export default function Home() {
       );
     else
       return (
-        <Grid xs={12} justify="center" >
-          <User
-            src={user?.photoURL}
-            name={user?.displayName}
-          />
-          <Link href="/myFavorite"></Link>
-          <Spacer x={4} />
-          <SignOut />
-        </Grid>
+        <Grid.Container justify="flex-end">
+          <Grid xs={5} sm={5} md={5} lg={2}>
+            <User
+              src={user?.photoURL}
+              name={user?.displayName}
+            />
+          </Grid>
+          <Spacer x={2} />
+          <Grid xs={5}>
+            <SignOut />
+          </Grid>
+        </Grid.Container>
       );
   };
 
@@ -40,12 +43,8 @@ export default function Home() {
         <Grid xs={12} justify="center">
           <Grid xs={4} justify="center"><h1>Gutendex</h1></Grid>
           <Grid xs={4} justify="center"></Grid>
-          <Grid xs={4} >
-            <Grid xs={6}>            
-              {renderUserMenu()}
-            </Grid>
-            <Grid xs={6}>
-            </Grid>
+          <Grid xs={4}>           
+            {renderUserMenu()}
           </Grid>
         </Grid>
         <Grid xs={12} justify="center">

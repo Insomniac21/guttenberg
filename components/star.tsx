@@ -14,9 +14,9 @@ export default function Star({ isSelected, onClick }){
 
     const renderStar = () => {
         if (isFilled) {
-            return <Button light><AiFillStar size={50} onClick={handleStarClick} /></Button>;
+            return <AiFillStar size={50} onClick={handleStarClick} />;
         } else {
-            return <Button light><AiOutlineStar size={50} onClick={handleStarClick} /></Button>;
+            return <AiOutlineStar size={50} onClick={handleStarClick} />;
         }
     };
 
