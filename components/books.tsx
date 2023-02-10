@@ -5,6 +5,7 @@ import Star from './star';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase.config';
 import MustSigninPopOver from './mustSignInPopOver';
+import { Book } from '../models/book';
 
 
 export default function Books() {
@@ -17,16 +18,16 @@ export default function Books() {
   const [ searchText, setSearchText ] = useState('');
   const [ next, setNext ] = useState(null);
 
-  const handleSearchInputKeyPress = (e) => {
+  const handleSearchInputKeyPress = (e: React.KeyboardEvent<any>) => {
     if (e.key !== 'Enter' || showFavoriteBooksOnly) return;
     load();
   };
 
-  const handleSearchInputChange = (e) => {
+  const handleSearchInputChange = (e: React.ChangeEvent<any>) => {
     setSearchText(e.target.value);
   };
 
-  const handleAddButtonClick = (book) => {
+  const handleAddButtonClick = (book : Book) => {
     if (isBookInFavorite(book)) {
       removeFromFavorite(book);
       setMyFavoriteBooks((prevState) => prevState.filter((favoriteBook) => favoriteBook.id !== book.id));
@@ -77,11 +78,11 @@ export default function Books() {
     setMyFavoriteBooks(data.books);
   }
 
-  async function addToFavorite(book) {
+  async function addToFavorite(book: Book) {
     await fetch('/api/favorite', { method: 'POST', body: JSON.stringify({ id: book.id, formats: book.formats, userUID: user?.uid }) });
   }
 
-  async function removeFromFavorite(book) {
+  async function removeFromFavorite(book: Book) {
     await fetch('/api/favorite', { method: 'DELETE', body: JSON.stringify({ id: book.id, userUID: user?.uid }) });
   }
 
@@ -90,12 +91,12 @@ export default function Books() {
     if (books.length === 0 && !showFavoriteBooksOnly) return <h3>No books found</h3>;
     if (books.length === 0 && showFavoriteBooksOnly) return <h3>No favorite books found</h3>;
 
-    return books.map((book) => {  
+    return books.map((book: Book) => {  
       return (<Grid key={book.id} xs={2}>{renderBookCard(book)}</Grid>);
     });
   };
 
-  const renderBookCard = (book) => {
+  const renderBookCard = (book: Book) => {
     return (<Card css={{ p: "$6", mh: "55vh", mw: "40vw" }}>
               <Card.Header>
                 <Grid xs={12}>
@@ -110,7 +111,7 @@ export default function Books() {
     );
   };
 
-  const renderStar = (book) => {
+  const renderStar = (book: Book) => {
     if (user) {
       return (<Star isSelected={isBookInFavorite(book)} onClick={() => handleAddButtonClick(book)} />);
     } else {
@@ -118,7 +119,7 @@ export default function Books() {
     }
   };
 
-  const isBookInFavorite = (book) => {
+  const isBookInFavorite = (book: Book) => {
     if (!myFavoriteBooks) return false;
     return myFavoriteBooks.some((favoriteBook) => favoriteBook.id === book.id);
   };
